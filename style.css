@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+canvas{
+   min-width: calc(100vh*(16/9));
+   min-height: calc(100vw*(9/16)); 
+   background-color: blue;
+}
+  
+.controller{
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 40vh;
+  width: 100vw;
+
+}
+
+.btn{
+  display: flex;
+  align-content: space-between;
+  justify-content: space-between;
+  margin: 0 5vw;
+  width: 40vh;
+  height: 100%;
+}
+
+.btn_control{
+  flex-direction: column;
+}
+
+.btn_control_container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.btn_move{
+  background-color: red;
+  width: calc(100%/3);
+  height: 100%;
+} 
+
+.btn_move.up,
+.btn_move.down{
+margin: auto;
+} 
+
