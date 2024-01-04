@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="6" height="1" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
- <tileset firstgid="1" source="Character_Run.tsx"/>
- <layer id="1" name="Слой тайлов 1" width="6" height="1">
-  <data encoding="csv">
-2147483660,2147483659,2147483658,2147483657,2147483656,2147483655
-</data>
- </layer>
-</map>
