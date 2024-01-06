@@ -18,10 +18,10 @@ canvas.width = 1280;
 canvas.height = 720;
 
 
-imgMap.src = '../urces/img/world/map.png'
-imgMapUpLauer.src = '../urces/img/world/mapUpLauer.png'
-imgCharacterRunUp.src = '../urces/img/character/me/Character_Run_Up.png'
-imgCharacterRunDown.src = '../urces/img/character/me/Character_Run_Down.png'
+imgMap.src = 'img/world/map.png'
+imgMapUpLauer.src = '/img/world/mapUpLauer.png'
+imgCharacterRunUp.src = 'urces/img/character/me/Character_Run_Up.png'
+imgCharacterRunDown.src = '/urces/img/character/me/Character_Run_Down.png'
 imgCharacterRunLeft.src = '../urces/img/character/me/Character_Run_Left.png'
 imgCharacterRunRight.src = '../urces/img/character/me/Character_Run_Right.png'
 
