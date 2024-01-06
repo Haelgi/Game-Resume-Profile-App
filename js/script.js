@@ -18,12 +18,12 @@ canvas.width = 1280;
 canvas.height = 720;
 
 
-imgMap.src = '../sources/img/world/map.png'
-imgMapUpLauer.src = '../sources/img/world/mapUpLauer.png'
-imgCharacterRunUp.src = '../sources/img/character/me/Character_Run_Up.png'
-imgCharacterRunDown.src = '../sources/img/character/me/Character_Run_Down.png'
-imgCharacterRunLeft.src = '../sources/img/character/me/Character_Run_Left.png'
-imgCharacterRunRight.src = '../sources/img/character/me/Character_Run_Right.png'
+imgMap.src = '../urces/img/world/map.png'
+imgMapUpLauer.src = '../urces/img/world/mapUpLauer.png'
+imgCharacterRunUp.src = '../urces/img/character/me/Character_Run_Up.png'
+imgCharacterRunDown.src = '../urces/img/character/me/Character_Run_Down.png'
+imgCharacterRunLeft.src = '../urces/img/character/me/Character_Run_Left.png'
+imgCharacterRunRight.src = '../urces/img/character/me/Character_Run_Right.png'
 
 class Sprite {
     constructor({ position, velocity, img, frames = { max: 1 }, sprites }) {
