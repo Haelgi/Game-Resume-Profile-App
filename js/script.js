@@ -22,8 +22,8 @@ imgMap.src = 'img/world/map.png'
 imgMapUpLauer.src = '/img/world/mapUpLauer.png'
 imgCharacterRunUp.src = 'urces/img/character/me/Character_Run_Up.png'
 imgCharacterRunDown.src = '/urces/img/character/me/Character_Run_Down.png'
-imgCharacterRunLeft.src = '../urces/img/character/me/Character_Run_Left.png'
-imgCharacterRunRight.src = '../urces/img/character/me/Character_Run_Right.png'
+imgCharacterRunLeft.src = '/js/img/character/me/Character_Run_Left.png'
+imgCharacterRunRight.src = 'js/img/character/me/Character_Run_Right.png'
 
 class Sprite {
     constructor({ position, velocity, img, frames = { max: 1 }, sprites }) {
