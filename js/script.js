@@ -242,6 +242,20 @@ const eventKeys = {
 
 const moveObj = [worldMap, testBound, worldMapUpLauer, ...boundes, ...eventHsBoundes, ...eventSsBoundes, ...eventPlBoundes]
 
+function printTextSign(txt) {
+
+    viewport.font = "31px 'DotGothic16', serif"
+    viewport.fillStyle = "rgb(0,0,0)"
+    const text = txt
+    const strings = text.split('/')
+    for (let i = 0; i < 5; i++) {
+        viewport.fillText(strings[0 + i], (canvas.width / 2) - 190, (canvas.height / 2) - 240 + i * 40)
+    }
+    for (let i = 5; i < strings.length; i++) {
+        viewport.fillText(strings[0 + i], (canvas.width / 2) + 20, (canvas.height / 2) - 360 + i * 40)
+    }
+}
+
 function eventSign() {
 
     for (let i = 0; i < eventHsBoundes.length; i++) {
@@ -297,15 +311,22 @@ function eventSign() {
 
     if (eventKeys.eventHsSign) {
         uiDialogPlate.draw()
+        printTextSign('Hard skills://·HTML5/·CSS3/·JavaScript/·Git/')
     }
 
     if (eventKeys.eventSsSign) {
         uiDialogPlate.draw()
+        printTextSign('Soft skills://·Scrum/·Agile/·GTD/·Teamwork')
     }
 
     if (eventKeys.eventPlSign) {
         uiDialogPlate.draw()
+        viewport.font = "31px 'DotGothic16', serif"
+        viewport.fillStyle = "rgb(0,0,0)"
+        viewport.fillText('Project links:', (canvas.width / 2) - 190, (canvas.height / 2) - 240).addEventListener('click', () => window.location.href = 'https://oleg-ratar.netlify.app/')
     }
+
+
 }
 
 function moveOnWorld() {
@@ -503,5 +524,8 @@ function animate() {
     moveOnWorld()
 
     eventSign()
+
 }
 animate()
+
+
