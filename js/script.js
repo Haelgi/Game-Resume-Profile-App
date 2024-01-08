@@ -1,9 +1,8 @@
 const canvas = document.querySelector('canvas')
 const viewport = canvas.getContext('2d')
 
+
 const controller = document.querySelector('.controller')
-
-
 
 
 const imgMap = new Image()
@@ -57,8 +56,6 @@ class Sprite {
             if (this.frames.val < this.frames.max - 1) this.frames.val++
             else this.frames.val = 0
         }
-
-
     }
 }
 
@@ -109,8 +106,8 @@ const player = new Sprite({
 // Collision map /////////////////////////////////////////////////////////
 
 class Bound {
-    static width = 64
-    static height = 64
+    static width = 16 * 4
+    static height = 16 * 4
     constructor({ position }) {
         this.position = position
     }
@@ -126,10 +123,59 @@ for (let i = 0; i < collision.length; i += 90) {
     collisionMap.push(collision.slice(i, 90 + i))
 }
 
+const eventHsMap = []
+for (let i = 0; i < eventHs.length; i += 90) {
+    eventHsMap.push(eventHs.slice(i, 90 + i))
+}
+
+const eventSsMap = []
+for (let i = 0; i < eventSs.length; i += 90) {
+    eventSsMap.push(eventSs.slice(i, 90 + i))
+}
+
+const eventPlMap = []
+for (let i = 0; i < eventPl.length; i += 90) {
+    eventPlMap.push(eventPl.slice(i, 90 + i))
+}
+
+
 const boundes = []
 collisionMap.forEach((row, y) => row.forEach((item, x) => {
     if (item !== 0)
         boundes.push(new Bound({
+            position: {
+                x: x * Bound.width + offset.x,
+                y: y * Bound.height + offset.y
+            }
+        }))
+}))
+
+const eventHsBoundes = []
+eventHsMap.forEach((row, y) => row.forEach((item, x) => {
+    if (item !== 0)
+        eventHsBoundes.push(new Bound({
+            position: {
+                x: x * Bound.width + offset.x,
+                y: y * Bound.height + offset.y
+            }
+        }))
+}))
+
+const eventSsBoundes = []
+eventSsMap.forEach((row, y) => row.forEach((item, x) => {
+    if (item !== 0)
+        eventSsBoundes.push(new Bound({
+            position: {
+                x: x * Bound.width + offset.x,
+                y: y * Bound.height + offset.y
+            }
+        }))
+}))
+
+const eventPlBoundes = []
+eventPlMap.forEach((row, y) => row.forEach((item, x) => {
+    if (item !== 0)
+        eventPlBoundes.push(new Bound({
             position: {
                 x: x * Bound.width + offset.x,
                 y: y * Bound.height + offset.y
@@ -151,6 +197,13 @@ function itemCollision({ item1, item2 }) {
         item1.position.y + 30 >= item2.position.y - Bound.height / 2)
 }
 
+function signCollision({ item1, item2 }) {
+    return (item1.position.x + 32 >= item2.position.x - Bound.width / 2 &&
+        item1.position.x - 32 <= item2.position.x + Bound.width / 2 &&
+        item1.position.y + 30 <= item2.position.y + Bound.height / 2 &&
+        item1.position.y + 30 >= item2.position.y - Bound.height / 2)
+}
+
 // end collision map /////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
@@ -159,24 +212,99 @@ function itemCollision({ item1, item2 }) {
 ///////////////////////////////////////////////////////////////////////////
 // Control movies /////////////////////////////////////////////////////////
 
-const moweKeys = {
+const moveKeys = {
     up: false,
     down: false,
     left: false,
     right: false,
 }
 
-const moveObj = [worldMap, testBound, worldMapUpLauer, ...boundes]
-function breakMoveByCollision() {
-
+const eventKeys = {
+    eventHsSign: false,
+    eventSsSign: false,
+    eventPlSign: false
 }
+
+const moveObj = [worldMap, testBound, worldMapUpLauer, ...boundes, ...eventHsBoundes, ...eventSsBoundes, ...eventPlBoundes]
+
+function eventSign() {
+
+    for (let i = 0; i < eventHsBoundes.length; i++) {
+        const bound = eventHsBoundes[i];
+        if (signCollision({
+            item1: player,
+            item2: {
+                ...bound, position: {
+                    x: bound.position.x,
+                    y: bound.position.y,
+                }
+            }
+        })) {
+            eventKeys.eventHsSign = true
+        } else {
+            eventKeys.eventHsSign = false
+        }
+    }
+
+    for (let i = 0; i < eventSsBoundes.length; i++) {
+        const bound = eventSsBoundes[i];
+        if (signCollision({
+            item1: player,
+            item2: {
+                ...bound, position: {
+                    x: bound.position.x,
+                    y: bound.position.y,
+                }
+            }
+        })) {
+            eventKeys.eventSsSign = true
+        } else {
+            eventKeys.eventSsSign = false
+        }
+    }
+
+    for (let i = 0; i < eventPlBoundes.length; i++) {
+        const bound = eventPlBoundes[i];
+        if (signCollision({
+            item1: player,
+            item2: {
+                ...bound, position: {
+                    x: bound.position.x,
+                    y: bound.position.y,
+                }
+            }
+        })) {
+            eventKeys.eventPlSign = true
+        } else {
+            eventKeys.eventPlSign = false
+        }
+    }
+
+    if (eventKeys.eventHsSign) {
+        viewport.fillStyle = "rgb(0, 0, 200)"
+        viewport.fillRect((canvas.width / 2) - 330, (canvas.height / 2) - 400, 600, 400)
+    }
+
+    if (eventKeys.eventSsSign) {
+        viewport.fillStyle = "rgb(0, 200, 0)"
+        viewport.fillRect((canvas.width / 2) - 330, (canvas.height / 2) - 400, 600, 400)
+    }
+
+    if (eventKeys.eventPlSign) {
+        viewport.fillStyle = "rgb(0, 200, 200)"
+        viewport.fillRect((canvas.width / 2) - 330, (canvas.height / 2) - 400, 600, 400)
+    }
+}
+
 function moveOnWorld() {
     const speed = 5
     let moving = true
     player.moving = false
-    if (moweKeys.up) {
+
+    if (moveKeys.up) {
         player.img = player.sprites.up
         player.moving = true
+
         for (let i = 0; i < boundes.length; i++) {
             const bound = boundes[i];
             if (itemCollision({
@@ -193,12 +321,14 @@ function moveOnWorld() {
                 break
             }
         }
+
         if (moving) moveObj.forEach(obj => obj.position.y += speed)
     }
 
-    if (moweKeys.down) {
+    if (moveKeys.down) {
         player.img = player.sprites.down
         player.moving = true
+
         for (let i = 0; i < boundes.length; i++) {
             const bound = boundes[i];
             if (itemCollision({
@@ -215,12 +345,14 @@ function moveOnWorld() {
                 break
             }
         }
+
         if (moving) moveObj.forEach(obj => obj.position.y -= speed)
     }
 
-    if (moweKeys.left) {
+    if (moveKeys.left) {
         player.img = player.sprites.left
         player.moving = true
+
         for (let i = 0; i < boundes.length; i++) {
             const bound = boundes[i];
             if (itemCollision({
@@ -237,12 +369,14 @@ function moveOnWorld() {
                 break
             }
         }
+
         if (moving) moveObj.forEach(obj => obj.position.x += speed)
     }
 
-    if (moweKeys.right) {
+    if (moveKeys.right) {
         player.img = player.sprites.right
         player.moving = true
+
         for (let i = 0; i < boundes.length; i++) {
             const bound = boundes[i];
             if (itemCollision({
@@ -259,6 +393,7 @@ function moveOnWorld() {
                 break
             }
         }
+
         if (moving) moveObj.forEach(obj => obj.position.x -= speed)
     }
 }
@@ -269,17 +404,17 @@ if (!supportsTouch) controller.style.display = 'none'
 
 controller.addEventListener('touchstart', (e) => {
     e.preventDefault()
-    e.target.closest('.up') ? moweKeys.up = true : ''
-    e.target.closest('.down') ? moweKeys.down = true : ''
-    e.target.closest('.left') ? moweKeys.left = true : ''
-    e.target.closest('.right') ? moweKeys.right = true : ''
+    e.target.closest('.up') ? moveKeys.up = true : ''
+    e.target.closest('.down') ? moveKeys.down = true : ''
+    e.target.closest('.left') ? moveKeys.left = true : ''
+    e.target.closest('.right') ? moveKeys.right = true : ''
 })
 controller.addEventListener('touchend', (e) => {
     e.preventDefault()
-    e.target.closest('.up') ? moweKeys.up = false : ''
-    e.target.closest('.down') ? moweKeys.down = false : ''
-    e.target.closest('.left') ? moweKeys.left = false : ''
-    e.target.closest('.right') ? moweKeys.right = false : ''
+    e.target.closest('.up') ? moveKeys.up = false : ''
+    e.target.closest('.down') ? moveKeys.down = false : ''
+    e.target.closest('.left') ? moveKeys.left = false : ''
+    e.target.closest('.right') ? moveKeys.right = false : ''
 })
 
 window.addEventListener('keydown', (e) => {
@@ -287,19 +422,19 @@ window.addEventListener('keydown', (e) => {
     switch (e.code) {
         case 'KeyW':
         case 'ArrowUp':
-            moweKeys.up = true
+            moveKeys.up = true
             break
         case 'KeyS':
         case 'ArrowDown':
-            moweKeys.down = true
+            moveKeys.down = true
             break
         case 'KeyA':
         case 'ArrowLeft':
-            moweKeys.left = true
+            moveKeys.left = true
             break
         case 'KeyD':
         case 'ArrowRight':
-            moweKeys.right = true
+            moveKeys.right = true
             break
     }
 })
@@ -309,19 +444,19 @@ window.addEventListener('keyup', (e) => {
     switch (e.code) {
         case 'KeyW':
         case 'ArrowUp':
-            moweKeys.up = false
+            moveKeys.up = false
             break
         case 'KeyS':
         case 'ArrowDown':
-            moweKeys.down = false
+            moveKeys.down = false
             break
         case 'KeyA':
         case 'ArrowLeft':
-            moweKeys.left = false
+            moveKeys.left = false
             break
         case 'KeyD':
         case 'ArrowRight':
-            moweKeys.right = false
+            moveKeys.right = false
             break
     }
 })
@@ -337,10 +472,24 @@ function animate() {
     player.draw()
     worldMapUpLauer.draw()
 
-    moveOnWorld()
-
     boundes.forEach(bound => {
         bound.draw()
     })
+
+    eventHsBoundes.forEach(bound => {
+        bound.draw()
+    })
+
+    eventSsBoundes.forEach(bound => {
+        bound.draw()
+    })
+
+    eventPlBoundes.forEach(bound => {
+        bound.draw()
+    })
+
+    moveOnWorld()
+
+    eventSign()
 }
 animate()
