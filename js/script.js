@@ -1,9 +1,7 @@
 const canvas = document.querySelector('canvas')
 const viewport = canvas.getContext('2d')
 
-
 const controller = document.querySelector('.controller')
-
 
 const imgMap = new Image()
 const imgMapUpLauer = new Image()
@@ -12,6 +10,8 @@ const imgCharacterRunDown = new Image()
 const imgCharacterRunLeft = new Image()
 const imgCharacterRunRight = new Image()
 
+const imgUiDialogPlate = new Image()
+
 
 canvas.width = 1280;
 canvas.height = 720;
@@ -19,10 +19,16 @@ canvas.height = 720;
 
 imgMap.src = 'sources/img/world/map.png'
 imgMapUpLauer.src = 'sources/img/world/mapUpLauer.png'
+
 imgCharacterRunUp.src = 'sources/img/character/me/Character_Run_Up.png'
 imgCharacterRunDown.src = 'sources/img/character/me/Character_Run_Down.png'
 imgCharacterRunLeft.src = 'sources/img/character/me/Character_Run_Left.png'
 imgCharacterRunRight.src = 'sources/img/character/me/Character_Run_Right.png'
+
+imgUiDialogPlate.src = 'sources/img/ui/signs/dialog_plate.png'
+
+
+
 
 class Sprite {
     constructor({ position, velocity, img, frames = { max: 1 }, sprites }) {
@@ -100,6 +106,15 @@ const player = new Sprite({
     },
 
     img: imgCharacterRunDown
+})
+
+const uiDialogPlate = new Sprite({
+    position: {
+        x: (canvas.width / 2) - 310,
+        y: (canvas.height / 2) - 330,
+    },
+
+    img: imgUiDialogPlate
 })
 
 ///////////////////////////////////////////////////////////////////////////
@@ -190,14 +205,14 @@ const testBound = new Bound({
     }
 })
 
-function itemCollision({ item1, item2 }) {
+function worldCollision({ item1, item2 }) {
     return (item1.position.x + 10 >= item2.position.x - Bound.width / 2 &&
         item1.position.x - 10 <= item2.position.x + Bound.width / 2 &&
         item1.position.y + 30 <= item2.position.y + Bound.height / 2 &&
         item1.position.y + 30 >= item2.position.y - Bound.height / 2)
 }
 
-function signCollision({ item1, item2 }) {
+function itemCollision({ item1, item2 }) {
     return (item1.position.x + 32 >= item2.position.x - Bound.width / 2 &&
         item1.position.x - 32 <= item2.position.x + Bound.width / 2 &&
         item1.position.y + 30 <= item2.position.y + Bound.height / 2 &&
@@ -231,7 +246,7 @@ function eventSign() {
 
     for (let i = 0; i < eventHsBoundes.length; i++) {
         const bound = eventHsBoundes[i];
-        if (signCollision({
+        if (itemCollision({
             item1: player,
             item2: {
                 ...bound, position: {
@@ -248,7 +263,7 @@ function eventSign() {
 
     for (let i = 0; i < eventSsBoundes.length; i++) {
         const bound = eventSsBoundes[i];
-        if (signCollision({
+        if (itemCollision({
             item1: player,
             item2: {
                 ...bound, position: {
@@ -265,7 +280,7 @@ function eventSign() {
 
     for (let i = 0; i < eventPlBoundes.length; i++) {
         const bound = eventPlBoundes[i];
-        if (signCollision({
+        if (itemCollision({
             item1: player,
             item2: {
                 ...bound, position: {
@@ -281,18 +296,15 @@ function eventSign() {
     }
 
     if (eventKeys.eventHsSign) {
-        viewport.fillStyle = "rgb(0, 0, 200)"
-        viewport.fillRect((canvas.width / 2) - 330, (canvas.height / 2) - 400, 600, 400)
+        uiDialogPlate.draw()
     }
 
     if (eventKeys.eventSsSign) {
-        viewport.fillStyle = "rgb(0, 200, 0)"
-        viewport.fillRect((canvas.width / 2) - 330, (canvas.height / 2) - 400, 600, 400)
+        uiDialogPlate.draw()
     }
 
     if (eventKeys.eventPlSign) {
-        viewport.fillStyle = "rgb(0, 200, 200)"
-        viewport.fillRect((canvas.width / 2) - 330, (canvas.height / 2) - 400, 600, 400)
+        uiDialogPlate.draw()
     }
 }
 
@@ -307,7 +319,7 @@ function moveOnWorld() {
 
         for (let i = 0; i < boundes.length; i++) {
             const bound = boundes[i];
-            if (itemCollision({
+            if (worldCollision({
                 item1: player,
                 item2: {
                     ...bound, position: {
@@ -331,7 +343,7 @@ function moveOnWorld() {
 
         for (let i = 0; i < boundes.length; i++) {
             const bound = boundes[i];
-            if (itemCollision({
+            if (worldCollision({
                 item1: player,
                 item2: {
                     ...bound, position: {
@@ -355,7 +367,7 @@ function moveOnWorld() {
 
         for (let i = 0; i < boundes.length; i++) {
             const bound = boundes[i];
-            if (itemCollision({
+            if (worldCollision({
                 item1: player,
                 item2: {
                     ...bound, position: {
@@ -379,7 +391,7 @@ function moveOnWorld() {
 
         for (let i = 0; i < boundes.length; i++) {
             const bound = boundes[i];
-            if (itemCollision({
+            if (worldCollision({
                 item1: player,
                 item2: {
                     ...bound, position: {
