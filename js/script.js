@@ -323,10 +323,8 @@ function eventSign() {
         uiDialogPlate.draw()
         viewport.font = "31px 'DotGothic16', serif"
         viewport.fillStyle = "rgb(0,0,0)"
-        viewport.fillText('Project links:', (canvas.width / 2) - 190, (canvas.height / 2) - 240).addEventListener('click', () => window.location.href = 'https://oleg-ratar.netlify.app/')
+        viewport.fillText('Profile links:', (canvas.width / 2) - 190, (canvas.height / 2) - 240)
     }
-
-
 }
 
 function moveOnWorld() {
