@@ -40,14 +40,13 @@ canvas{
   /* background-color: rgb(233, 187, 34); */
   display: none;
   width: calc((100vw/2)*1);
-  max-width: calc((100vw/2)*2);
 }
 
 
 img{
-  min-width: calc(100vh*(16/9)*0.05);
-  min-height: calc(100vw*(9/16)*0.05); 
-  margin: calc(100vw*(9/16)*0.03);
+  min-width: calc(100vh*(16/9)*0.045);
+  min-height: calc(100vw*(9/16)*0.045); 
+  margin: calc(100vw*(9/16)*0.015);
 }
 
 .controller{
