@@ -110,7 +110,7 @@ const player = new Sprite({
 
 const uiDialogPlate = new Sprite({
     position: {
-        x: (canvas.width / 2) - 310,
+        x: (canvas.width / 2) - 270,
         y: (canvas.height / 2) - 330,
     },
 
@@ -249,7 +249,7 @@ function printTextSign(txt) {
     const text = txt
     const strings = text.split('/')
     for (let i = 0; i < 5; i++) {
-        viewport.fillText(strings[0 + i], (canvas.width / 2) - 190, (canvas.height / 2) - 240 + i * 40)
+        viewport.fillText(strings[0 + i], (canvas.width / 2) - 170, (canvas.height / 2) - 240 + i * 40)
     }
     for (let i = 5; i < strings.length; i++) {
         viewport.fillText(strings[0 + i], (canvas.width / 2) + 20, (canvas.height / 2) - 360 + i * 40)
