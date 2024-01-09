@@ -2,6 +2,8 @@ const canvas = document.querySelector('canvas')
 const viewport = canvas.getContext('2d')
 
 const controller = document.querySelector('.controller')
+const profileLinksContainer = document.querySelector('.profileLinks_container')
+
 
 const imgMap = new Image()
 const imgMapUpLauer = new Image()
@@ -257,7 +259,7 @@ function printTextSign(txt) {
 }
 
 function eventSign() {
-
+    profileLinksContainer.style.display = 'none'
     for (let i = 0; i < eventHsBoundes.length; i++) {
         const bound = eventHsBoundes[i];
         if (itemCollision({
@@ -324,7 +326,10 @@ function eventSign() {
         viewport.font = "31px 'DotGothic16', serif"
         viewport.fillStyle = "rgb(0,0,0)"
         viewport.fillText('Profile links:', (canvas.width / 2) - 190, (canvas.height / 2) - 240)
+        profileLinksContainer.style.display = 'flex'
     }
+
+
 }
 
 function moveOnWorld() {

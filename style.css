@@ -21,7 +21,36 @@ canvas{
    background-color: blue;
 }
   
+.container{
+  position: absolute;
+  /* background-color: rgb(233, 34, 150); */
+  height: 100vh;
+  width: 100vw;
+  
+}
+
+.profileLinks_container{
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: auto;
+  top: calc(100vh/2*(9/16)*0.75);
+  left: calc((100vw/2)*0.5);
+  /* background-color: rgb(233, 187, 34); */
+  display: none;
+  width: calc((100vw/2)*1);
+}
+
+
+img{
+  min-width: calc(100vh*(16/9)*0.045);
+  min-height: calc(100vw*(9/16)*0.045); 
+  margin: calc(100vw*(9/16)*0.015);
+}
+
 .controller{
+  /* background-color: rgb(34, 233, 140); */
   position: absolute;
   bottom: 0;
   display: flex;
@@ -65,3 +94,7 @@ canvas{
 margin: auto;
 } 
 
+i {
+  color: aqua;
+  font: 40px "Fira Sans", sans-serif;
+}
