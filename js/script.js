@@ -250,7 +250,7 @@ function printTextSign(txt) {
     viewport.fillStyle = "rgba(0,0,0,0.7)"
     const text = txt
     const strings = text.split('/')
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < strings.length && i < 5; i++) {
         viewport.fillText(strings[0 + i], (canvas.width / 2) - 170, (canvas.height / 2) - 240 + i * 40)
     }
     for (let i = 5; i < strings.length; i++) {
@@ -323,9 +323,7 @@ function eventSign() {
 
     if (eventKeys.eventPlSign) {
         uiDialogPlate.draw()
-        viewport.font = "31px 'DotGothic16', serif"
-        viewport.fillStyle = "rgb(0,0,0)"
-        viewport.fillText('Profile links:', (canvas.width / 2) - 190, (canvas.height / 2) - 240)
+        printTextSign('Profile links:')
         profileLinksContainer.style.display = 'flex'
     }
 
