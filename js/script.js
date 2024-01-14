@@ -15,8 +15,8 @@ const imgCharacterRunRight = new Image()
 const imgUiDialogPlate = new Image()
 
 
-canvas.width = 1280;
-canvas.height = 720;
+canvas.width = 2280;
+canvas.height = 1080;
 
 
 imgMap.src = 'sources/img/world/map.png'
@@ -69,8 +69,8 @@ class Sprite {
 
 
 const offset = {
-    x: -2050,
-    y: -1600
+    x: -1550,
+    y: -1400
 }
 
 const worldMap = new Sprite({
