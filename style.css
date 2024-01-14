@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+@font-face {
+  font-family: "Gouranga-Pixel";
+  src:
+    url("sources/font/Gouranga-Pixel.ttf");
+}
+
+
 * {
   margin: 0;
   padding: 0;

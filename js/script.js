@@ -246,8 +246,8 @@ const moveObj = [worldMap, testBound, worldMapUpLauer, ...boundes, ...eventHsBou
 
 function printTextSign(txt) {
 
-    viewport.font = "31px 'DotGothic16', serif"
-    viewport.fillStyle = "rgb(0,0,0)"
+    viewport.font = "31px 'Gouranga-Pixel'"
+    viewport.fillStyle = "rgba(0,0,0,0.7)"
     const text = txt
     const strings = text.split('/')
     for (let i = 0; i < 5; i++) {
@@ -527,7 +527,7 @@ function animate() {
     moveOnWorld()
 
     eventSign()
-
+    console.log(window)
 }
 animate()
 
