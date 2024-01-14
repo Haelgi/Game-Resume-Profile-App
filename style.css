@@ -58,45 +58,47 @@ img{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
-  height: 40vh;
-  width: 100vw;
-
+  /* align-items: flex-end; */
+  width: 100%;
 }
 
 .btn{
+  /* background-color: rgb(47, 34, 233); */
   display: flex;
   align-content: space-between;
   justify-content: space-between;
-  margin: 0 5vw;
-  width: 40vh;
-  height: 100%;
+  margin: 0 10px 10px;
+ 
 }
 
 .btn_control{
-  flex-direction: column;
+  background-image: url('sources/img/ui/controller/cross.png');
+  background-size: 100%;
+}
+.btn_action{
+  background-image: url('sources/img/ui/controller/btn.png');
+  background-size: 100%;
 }
 
+.btn_control,
+.btn_action{
+  /* background-color: rgb(213, 233, 34); */
+  flex-direction: column;
+  width: 180px;
+  height: 180px;
+}
+
+
+
 .btn_control_container{
+  /* background-color: rgb(116, 82, 172); */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
-  height: 100%;
 }
 
 .btn_move{
-  background-color: red;
-  width: calc(100%/3);
-  height: 100%;
+  /* background-color: red; */
+  width: 60px;
+  height: 60px;
 } 
-
-.btn_move.up,
-.btn_move.down{
-margin: auto;
-} 
-
-i {
-  color: aqua;
-  font: 40px "Fira Sans", sans-serif;
-}
