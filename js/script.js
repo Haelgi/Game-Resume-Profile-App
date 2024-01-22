@@ -14,10 +14,12 @@ const imgCharacterRunRight = new Image()
 
 const imgUiDialogPlate = new Image()
 
-
 canvas.width = 2280;
 canvas.height = 1080;
 
+
+
+console.log(screen.orientation.type)
 
 imgMap.src = 'sources/img/world/map.png'
 imgMapUpLauer.src = 'sources/img/world/mapUpLauer.png'
@@ -327,10 +329,25 @@ function eventSign() {
         profileLinksContainer.style.display = 'flex'
     }
 
+    switch (screen.orientation.type) {
+        case "landscape-primary":
+        case "landscape-secondary":
+            canvas.style.scale = 1.6
+            profileLinksContainer.style.scale = 1.6
+            profileLinksContainer.style.top = '80px'
+            break;
+        case "portrait-secondary":
+        case "portrait-primary":
+            canvas.style.scale = 1
+            profileLinksContainer.style.scale = 1
+            break;
+    }
+
 
 }
 
 function moveOnWorld() {
+
     const speed = 5
     let moving = true
     player.moving = false
@@ -525,7 +542,8 @@ function animate() {
     moveOnWorld()
 
     eventSign()
-    console.log(window)
+
+
 }
 animate()
 
